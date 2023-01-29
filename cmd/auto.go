@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 Bartek Laskowski <dev@undg.xyz>
-*/
 package cmd
 
 import (

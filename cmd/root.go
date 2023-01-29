@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 Bartek Laskowski <dev@undg.xyz>
-*/
 package cmd
 
 import (
@@ -12,15 +9,12 @@ import (
 
 const APP_NAME = "autorotate"
 
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "autorotate",
 	Short: "Rotate screen and digitizer.",
 	Long:  fmt.Sprintf(`Rotate screen and all inputs for Xorg. 2in1 laptops touch screen, stylus devices and other inputs, need to be rotated independently. %s will rotate screen and all input devices at once.`, APP_NAME),
-
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

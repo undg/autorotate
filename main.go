@@ -1,5 +1,5 @@
 /*
-Copyright © 2023 Bartek Lakowski dev@undg.xyz
+Copyright © 2023 Bartek Laskowski <dev@undg.xyz>
 
 */
 package main

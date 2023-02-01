@@ -1,11 +1,8 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 	"github.com/undg/autorotate/sys"
-	// "github.com/undg/autorotate/sys"
 )
 
 var landscapeCmd = &cobra.Command{
@@ -15,15 +12,11 @@ var landscapeCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		isInvert, _ := cmd.Flags().GetBool("invert")
 
-		var tmpOut string
-
 		if isInvert {
-			tmpOut = sys.Rotate("eDP", "inverted", "-1 0 1 0 -1 1 0 0 1")
+			sys.Rotate(sys.Display(), "inverted", "-1 0 1 0 -1 1 0 0 1")
 		} else {
-			tmpOut = sys.Rotate("eDP", "normal", "0 0 0 0 0 0 0 0 0")
+			sys.Rotate(sys.Display(), "normal", "0 0 0 0 0 0 0 0 0")
 		}
-
-		fmt.Println(tmpOut)
 	},
 }
 

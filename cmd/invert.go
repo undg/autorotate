@@ -1,31 +1,19 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
+	"github.com/undg/autorotate/sys"
 )
 
-// invertCmd represents the invert command
 var invertCmd = &cobra.Command{
 	Use:   "invert",
 	Short: "Rotate 180deg (upside down).",
 	Long:  `Rotate 180deg (upside down).`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("invert called")
+		sys.Rotate(sys.Display(), "inverted", "-1 0 1 0 -1 1 0 0 1")
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(invertCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// invertCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// invertCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

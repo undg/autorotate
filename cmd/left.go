@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 	"github.com/undg/autorotate/sys"
 )
@@ -12,7 +10,7 @@ var leftCmd = &cobra.Command{
 	Short: "Rotate 90deg left.",
 	Long:  `Rotate 90deg left.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(sys.Left())
+		sys.Rotate(sys.Display(), "left", "0 -1 1 1 0 0 0 0 1")
 	},
 }
 

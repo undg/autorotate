@@ -5,6 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/undg/autorotate/sys"
+	// "github.com/undg/autorotate/sys"
 )
 
 var landscapeCmd = &cobra.Command{
@@ -17,9 +18,9 @@ var landscapeCmd = &cobra.Command{
 		var tmpOut string
 
 		if isInvert {
-			tmpOut = sys.LandscapeInvert()
+			tmpOut = sys.Rotate("eDP", "inverted", "-1 0 1 0 -1 1 0 0 1")
 		} else {
-			tmpOut = sys.Landscape()
+			tmpOut = sys.Rotate("eDP", "normal", "0 0 0 0 0 0 0 0 0")
 		}
 
 		fmt.Println(tmpOut)
@@ -29,5 +30,5 @@ var landscapeCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(landscapeCmd)
 
-	landscapeCmd.Flags().BoolP("invert", "i", false, "Invert portrait orientation.")
+	landscapeCmd.Flags().BoolP("invert", "i", false, "Invert landscape orientation.")
 }

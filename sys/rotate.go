@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
-	// "github.com/oxzi/go-xinput"
-)
+	"strconv"
 
+	"github.com/oxzi/go-xinput"
+)
 
 func Rotate(screen string, rotate string, matrix string) string {
 	outXrandr, errXrandr := exec.Command("xrandr", "--output", screen, "--rotate", rotate).Output()
@@ -14,33 +15,23 @@ func Rotate(screen string, rotate string, matrix string) string {
 	if errXrandr != nil {
 		log.Fatal(errXrandr)
 	}
-
 	fmt.Println(string(outXrandr))
 
+	display := xinput.XOpenDisplay(nil)
+	defer xinput.XCloseDisplay(display)
 
-	outXinput, errXinput := exec.Command("xinput", "set-prop", "10", "--type=float", "\"Coordinate Transformation Matrix\"", matrix).Output()
+	for _, device := range xinput.GetXDeviceInfos(display) {
+		if device.Use == "slave pointer" {
 
-	if errXinput != nil {
-		log.Fatal(errXinput)
+			outXinput, errXinput := exec.Command("sh", "-c", "xinput set-prop "+strconv.FormatUint(device.Id, 10)+" --type=float 'Coordinate Transformation Matrix' "+matrix).Output()
+
+			if errXinput != nil {
+				log.Fatal(errXinput)
+			}
+			fmt.Println(string(outXinput))
+
+		}
 	}
-	fmt.Println(outXinput)
 
-	// display := xinput.XOpenDisplay(nil)
-	// defer xinput.XCloseDisplay(display)
-	//
-	// for _, device := range xinput.GetXDeviceInfos(display) {
-	// 	if device.Use == "slave pointer" {
-	//
-	// 		cmdXinput := exec.Command("xinput", "set-prop", "10", "--type=float", "\"Coordinate Transformation Matrix\"", matrix)
-	//
-	// 		errXinput := cmdXinput.Run()
-	//
-	// 		if errXinput != nil {
-	// 			log.Fatal(errXinput)
-	// 		}
-	//
-	// 	}
-	// }
-
-	return matrix + rotate
+	return matrix + " " + rotate
 }

@@ -10,7 +10,7 @@ var rightCmd = &cobra.Command{
 	Short: "Rotate 90deg right.",
 	Long:  `Rotate 90deg right.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		sys.Rotate(sys.Display(), "right", "0 1 0 -1 0 1 0 0 1")
+		sys.RotateRight()
 	},
 }
 

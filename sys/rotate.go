@@ -36,3 +36,19 @@ func Rotate(screen string, rotate string, matrix string) {
 		}
 	}
 }
+
+func RotateNormal() {
+	Rotate(Display(), "normal", "0 0 0 0 0 0 0 0 0")
+}
+
+func RotateInvert() {
+	Rotate(Display(), "inverted", "-1 0 1 0 -1 1 0 0 1")
+}
+
+func RotateRight() {
+	Rotate(Display(), "right", "0 1 0 -1 0 1 0 0 1")
+}
+
+func RotateLeft() {
+	Rotate(Display(), "left", "0 -1 1 1 0 0 0 0 1")
+}

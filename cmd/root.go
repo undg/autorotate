@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/undg/autorotate/sys"
 )
 
 const APP_NAME = "autorotate"
@@ -24,6 +25,8 @@ func Execute() {
 	if err != nil {
 		os.Exit(1)
 	}
+	fmt.Println(sys.InAccel())
+	fmt.Println(sys.GetOrientation(sys.InAccel()))
 }
 
 func init() {

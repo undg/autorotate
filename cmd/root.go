@@ -14,7 +14,7 @@ const APP_NAME = "autorotate"
 var rootCmd = &cobra.Command{
 	Use:   "autorotate",
 	Short: "Rotate screen and digitizer.",
-	Long:  fmt.Sprintf(`Rotate screen and all inputs for Xorg. 2in1 laptops touch screen, stylus devices and other inputs, need to be rotated independently. %s will rotate screen and all input devices at once.`, APP_NAME),
+	Long:  fmt.Sprintf(`Rotate screen and all inputs for 2in1 laptops with touch screen, stylus devices and other inputs. In Xorg you need to rotate them independently with xrandr and xinput. %s will rotate screen and all input devices at once.`, APP_NAME),
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

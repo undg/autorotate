@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/undg/autorotate/sys"
 )
 
 // autoCmd represents the auto command
@@ -12,7 +13,7 @@ var autoCmd = &cobra.Command{
 	Short: "Detect screen orientation.",
 	Long:  `Detect screen orientation from axis sensors.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("auto called")
+		fmt.Println(sys.SetOrientation(sys.GetInAccel()))
 	},
 }
 

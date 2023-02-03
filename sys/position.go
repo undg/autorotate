@@ -10,7 +10,7 @@ type X = int
 type Y = int
 type Z = int
 
-func GetInAccel() (X, Y, Z) {
+func getInAccel() (X, Y, Z) {
 	file_x, _ := filepath.Glob("/sys/bus/iio/devices/*/in_accel_x_raw")
 	file_y, _ := filepath.Glob("/sys/bus/iio/devices/*/in_accel_y_raw")
 	file_z, _ := filepath.Glob("/sys/bus/iio/devices/*/in_accel_z_raw")
@@ -39,7 +39,9 @@ const (
 	OrientationUnknown             = "unknown"
 )
 
-func SetOrientation(x int, y int, z int) Orientation {
+func SetOrientation() Orientation {
+	x,y,z := getInAccel()
+
 	var orientation Orientation
 
 	if isLandscape(x,y,z) {

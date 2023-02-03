@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/spf13/cobra"
 	"github.com/undg/autorotate/sys"
@@ -13,7 +14,14 @@ var autoCmd = &cobra.Command{
 	Short: "Detect screen orientation.",
 	Long:  `Detect screen orientation from axis sensors.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(sys.SetOrientation(sys.GetInAccel()))
+		ticker := time.NewTicker(1 * time.Second)
+		for {
+			select {
+			case <-ticker.C:
+				fmt.Println(sys.SetOrientation(sys.GetInAccel()))
+			}
+		}
+
 	},
 }
 

@@ -45,15 +45,19 @@ func SetOrientation(x int, y int, z int) Orientation {
 	if isLandscape(x,y,z) {
 		orientation = OrientationNormal
 		RotateNormal()
+		// enable keyboard
 	} else if isInvert(x,y,z) {
 		orientation = OrientationInvert
 		RotateInvert()
+		// disable keyboard
 	} else if isLeft(x,y,z) {
 		orientation = OrientationLeft
 		RotateLeft()
+		// disable keyboard
 	} else if isRight(x,y,z) {
 		orientation = OrientationRight
 		RotateRight()
+		// disable keyboard
 	} else {
 		orientation = OrientationUnknown
 	}

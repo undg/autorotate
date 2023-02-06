@@ -5,9 +5,8 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/undg/autorotate/sys"
 )
-
-const APP_NAME = "autorotate"
 
 // @TODO (undg) 2023-02-06: move it to config
 // Xorg monitor name
@@ -19,7 +18,7 @@ var rootCmd = &cobra.Command{
 	Short: "Rotate screen and digitizer on 2in1 laptops.",
 	Long: fmt.Sprintf(`Rotate screen and all inputs on 2in1 laptops with Xorg. Touch screen, stylus and other inputs devices,
 need to be rotated independently.
-%s will rotate screen and all input devices at once.`, APP_NAME),
+%s will rotate screen and all input devices at once.`, sys.APP_NAME),
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

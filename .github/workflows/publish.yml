@@ -21,7 +21,7 @@ jobs:
           go get -t ./...
           go build -o build/autorotate
           cp -r _config build/
-          zip build.zip build
+          zip build.zip build/*
       - name: version
         run: echo "::set-output name=version::$(./build/autorotate version --short)"
         id: version

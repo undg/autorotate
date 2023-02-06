@@ -19,7 +19,9 @@ jobs:
           sudo apt-get install -y libxi-dev
           mkdir bin
           go get -t ./...
-          go build -o ../bin
+          go build -o bin/autorotate
+          cp -r _config bin/
+          zip -r build.zip bin/*
       - name: version
         run: echo "::set-output name=version::$(./bin/autorotate version --short)"
         id: version
@@ -35,12 +37,12 @@ jobs:
           # body_path: CHANGELOG.md
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      - name: upload linux artifact
+      - name: upload zip artifact
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./bin/autorotate
-          asset_name: autorotate.tar.gz
-          asset_content_type: application/gzip
+          asset_path: ./build.zip
+          asset_name: autorotate.zip
+          asset_content_type: application/zip

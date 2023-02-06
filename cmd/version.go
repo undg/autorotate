@@ -17,5 +17,5 @@ var versionCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(versionCmd)
-	landscapeCmd.Flags().BoolP("short", "s", false, "Short version")
+	versionCmd.Flags().BoolP("short", "s", false, "Short version")
 }

@@ -21,6 +21,7 @@ jobs:
           go get -t ./...
           go build -o build/autorotate
           cp -r _config build/
+          zip build.zip build
       - name: version
         run: echo "::set-output name=version::$(./build/autorotate version --short)"
         id: version
@@ -36,21 +37,12 @@ jobs:
           # body_path: CHANGELOG.md
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      - name: upload gzip artifact
+      - name: upload zip artifact
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/
-          asset_name: autorotate.tar.gz
-          asset_content_type: application/gzip
-      # - name: upload zip artifact
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ github.token }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: ./build/*
-      #     asset_name: autorotate.zip
-      #     asset_content_type: application/zip
+          asset_path: ./build.zip
+          asset_name: autorotate.zip
+          asset_content_type: application/zip

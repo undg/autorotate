@@ -19,7 +19,7 @@ jobs:
           sudo apt-get install -y libxi-dev
           mkdir bin
           go get -t ./...
-          go build -o ../bin
+          go build -o bin
       - name: version
         run: echo "::set-output name=version::$(./bin/autorotate version --short)"
         id: version

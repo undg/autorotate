@@ -42,7 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/
+          asset_path: ./build
           asset_name: autorotate.tar.gz
           asset_content_type: application/gzip
       - name: upload zip artifact
@@ -51,6 +51,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/
+          asset_path: ./build
           asset_name: autorotate.zip
           asset_content_type: application/zip

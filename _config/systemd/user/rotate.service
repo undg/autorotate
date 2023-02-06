@@ -1,0 +1,5 @@
+[Unit]
+Description=Auto rotate screen in 2in1 laptop
+
+[Service]
+ExecStart=/home/undg/bin/autorotate auto --daemon --display eDP

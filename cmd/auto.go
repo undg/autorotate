@@ -19,11 +19,11 @@ var autoCmd = &cobra.Command{
 			for {
 				select {
 				case <-ticker.C:
-				sys.SetOrientation(Display)
+				sys.SetOrientation(DisplayName)
 				}
 			}
 		} else {
-			sys.SetOrientation(Display)
+			sys.SetOrientation(DisplayName)
 		}
 	},
 }
@@ -31,5 +31,5 @@ var autoCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(autoCmd)
 
-	autoCmd.Flags().BoolP("daemon", "d", false, "Continuously check orientation in background (every 1sec by default).")
+	autoCmd.Flags().Bool("daemon", false, "Continuously check orientation in background (every 1sec by default).")
 }

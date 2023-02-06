@@ -9,7 +9,9 @@ import (
 
 const APP_NAME = "autorotate"
 
-var Display string
+// @TODO (undg) 2023-02-06: move it to config
+// Xorg monitor name
+var DisplayName string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -30,5 +32,5 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.PersistentFlags().StringVarP(&Display, "display", "d", "eDP", "Display that will be rotated, for example eDP or LVDS. You can check it with `autorotate list` or `xrandr --listactivemonitors|awk '{print $NF}'`")
+	rootCmd.PersistentFlags().StringVarP(&DisplayName, "display", "d", "eDP", "X11 Display that will be rotated, for example eDP or LVDS. You can check monitor names with command `autorotate list` or `xrandr --listactivemonitors|awk '{print $NF}'`")
 }

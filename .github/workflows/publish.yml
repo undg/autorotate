@@ -23,36 +23,10 @@ jobs:
           cp -r _config bin/
           zip -r autorotate.zip bin/*
       - name: version
-        # run: echo "::set-output name=version::$(./bin/autorotate version --short)"
         run: echo "{version}::{$(./bin/autorotate version --short)}"
         id: version
 
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
-          title: ${{ steps.version.outputs.version }}
           files: ./autorotate.zip
-
-
-      # - name: release
-      #   uses: actions/create-release@v1
-      #   id: create_release
-      #   with:
-      #     draft: false
-      #     prerelease: false
-      #     release_name: ${{ steps.version.outputs.version }}
-      #     tag_name: ${{ github.ref }}
-      #     # body_path: CHANGELOG.md
-      #   env:
-      #     GITHUB_TOKEN: ${{ github.token }}
-      # - name: upload zip artifact
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ github.token }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: ./build.zip
-      #     asset_name: autorotate.zip
-      #     asset_content_type: application/zip

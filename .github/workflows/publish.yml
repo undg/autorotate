@@ -20,7 +20,7 @@ jobs:
           mkdir build
           go get -t ./...
           go build -o build
-          cp _config build/
+          cp -r _config build/
       - name: version
         run: echo "::set-output name=version::$(./build/autorotate version --short)"
         id: version

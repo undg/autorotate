@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-const VERSION = "v0.0.1"
+const VERSION = "v0.0.2"
 const APP_NAME = "autorotate"
 
 func LogVersion(short bool) {

@@ -17,13 +17,13 @@ jobs:
       - name: build
         run: |
           sudo apt-get install -y libxi-dev
-          mkdir build
+          mkdir bin
           go get -t ./...
-          go build -o build/autorotate
-          cp -r _config build/
-          zip -r build.zip build/*
+          go build -o bin/autorotate
+          cp -r _config bin/
+          zip -r build.zip bin/*
       - name: version
-        run: echo "::set-output name=version::$(./build/autorotate version --short)"
+        run: echo "::set-output name=version::$(./bin/autorotate version --short)"
         id: version
 
       - name: release

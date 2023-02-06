@@ -19,6 +19,7 @@ jobs:
         run: |
           mkdir build
           cd autorotate
+          go get -t ./...
           go build -o ../build
           cd ..
     

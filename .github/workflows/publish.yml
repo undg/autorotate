@@ -23,7 +23,8 @@ jobs:
           cp -r _config bin/
           zip -r build.zip bin/*
       - name: version
-        run: echo "::set-output name=version::$(./bin/autorotate version --short)"
+        # run: echo "::set-output name=version::$(./bin/autorotate version --short)"
+        run: echo "{version}::{$(./bin/autorotate version --short)}"
         id: version
 
       - name: release

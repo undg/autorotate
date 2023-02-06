@@ -1,0 +1,29 @@
+name: Publish GitHub Actions with Artifacts
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+.*"
+
+jobs:
+       
+  archive-build-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: get repo
+        run: git clone 'https://github.com/undg/autorotate'
+        
+      - name: step 2 - Add artifacts to publish to the temp folder
+        run: |
+          mkdir build
+          cd autorotate
+          go build
+         
+          cd ..
+    
+      - name: Step 3 - Use the Upload Artifact GitHub Action
+        uses: actions/upload-artifact@v2
+        with: 
+          name: assets-for-download
+          path: downloads

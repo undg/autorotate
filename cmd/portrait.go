@@ -13,9 +13,9 @@ var portraitCmd = &cobra.Command{
 		isInvert, _ := cmd.Flags().GetBool("invert")
 
 		if isInvert {
-			sys.RotateRight()
+			sys.RotateRight(Display)
 		} else {
-			sys.RotateLeft()
+			sys.RotateLeft(Display)
 		}
 	},
 }

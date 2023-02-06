@@ -37,18 +37,18 @@ func Rotate(screen string, rotate string, matrix string) {
 	}
 }
 
-func RotateNormal() {
-	Rotate(Display(), "normal", "0 0 0 0 0 0 0 0 0")
+func RotateNormal(display string) {
+	Rotate(display, "normal", "0 0 0 0 0 0 0 0 0")
 }
 
-func RotateInvert() {
-	Rotate(Display(), "inverted", "-1 0 1 0 -1 1 0 0 1")
+func RotateInvert(display string) {
+	Rotate(display, "inverted", "-1 0 1 0 -1 1 0 0 1")
 }
 
-func RotateRight() {
-	Rotate(Display(), "right", "0 1 0 -1 0 1 0 0 1")
+func RotateRight(display string) {
+	Rotate(display, "right", "0 1 0 -1 0 1 0 0 1")
 }
 
-func RotateLeft() {
-	Rotate(Display(), "left", "0 -1 1 1 0 0 0 0 1")
+func RotateLeft(display string) {
+	Rotate(display, "left", "0 -1 1 1 0 0 0 0 1")
 }

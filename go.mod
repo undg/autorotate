@@ -9,4 +9,5 @@ require (
 	github.com/oxzi/go-xinput v0.1.1 // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/vcraescu/go-xrandr v0.0.0-20201121120806-4e66d7925a73 // indirect
 )

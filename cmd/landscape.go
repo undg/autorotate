@@ -11,11 +11,12 @@ var landscapeCmd = &cobra.Command{
 	Long:  `Landscape screen orientation.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		isInvert, _ := cmd.Flags().GetBool("invert")
+		display, _ := cmd.Flags().GetString("display")
 
 		if isInvert {
-			sys.RotateInvert()
+			sys.RotateInvert(display)
 		} else {
-			sys.RotateNormal()
+			sys.RotateNormal(display)
 		}
 	},
 }
@@ -26,11 +27,12 @@ var normalCmd = &cobra.Command{
 	Long:  `Landscape screen orientation.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		isInvert, _ := cmd.Flags().GetBool("invert")
+		display, _ := cmd.Flags().GetString("display")
 
 		if isInvert {
-			sys.RotateInvert()
+			sys.RotateInvert(display)
 		} else {
-			sys.RotateNormal()
+			sys.RotateNormal(display)
 		}
 	},
 }
@@ -40,7 +42,9 @@ var invertCmd = &cobra.Command{
 	Short: "Rotate 180deg (upside down).",
 	Long:  `Rotate 180deg (upside down).`,
 	Run: func(cmd *cobra.Command, args []string) {
-		sys.RotateInvert()
+		display, _ := cmd.Flags().GetString("display")
+
+		sys.RotateInvert(display)
 	},
 }
 

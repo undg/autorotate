@@ -39,26 +39,26 @@ const (
 	OrientationUnknown             = "unknown"
 )
 
-func SetOrientation() Orientation {
+func SetOrientation(display string) Orientation {
 	x,y,z := getInAccel()
 
 	var orientation Orientation
 
 	if isLandscape(x,y,z) {
 		orientation = OrientationNormal
-		RotateNormal()
+		RotateNormal(display)
 		// enable keyboard
 	} else if isInvert(x,y,z) {
 		orientation = OrientationInvert
-		RotateInvert()
+		RotateInvert(display)
 		// disable keyboard
 	} else if isLeft(x,y,z) {
 		orientation = OrientationLeft
-		RotateLeft()
+		RotateLeft(display)
 		// disable keyboard
 	} else if isRight(x,y,z) {
 		orientation = OrientationRight
-		RotateRight()
+		RotateRight(display)
 		// disable keyboard
 	} else {
 		orientation = OrientationUnknown

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
+	"time"
 )
 
 type X = int
@@ -39,24 +40,37 @@ const (
 	OrientationUnknown             = "unknown"
 )
 
+func Autorotate(display string, isDaemon bool) {
+	if isDaemon {
+		ticker := time.NewTicker(1 * time.Second)
+		for {
+			select {
+			case <-ticker.C:
+				SetOrientation(display)
+			}
+		}
+	} else {
+		SetOrientation(display)
+	}
+}
 func SetOrientation(display string) Orientation {
-	x,y,z := getInAccel()
+	x, y, z := getInAccel()
 
 	var orientation Orientation
 
-	if isLandscape(x,y,z) {
+	if isLandscape(x, y, z) {
 		orientation = OrientationNormal
 		RotateNormal(display)
 		// enable keyboard
-	} else if isInvert(x,y,z) {
+	} else if isInvert(x, y, z) {
 		orientation = OrientationInvert
 		RotateInvert(display)
 		// disable keyboard
-	} else if isLeft(x,y,z) {
+	} else if isLeft(x, y, z) {
 		orientation = OrientationLeft
 		RotateLeft(display)
 		// disable keyboard
-	} else if isRight(x,y,z) {
+	} else if isRight(x, y, z) {
 		orientation = OrientationRight
 		RotateRight(display)
 		// disable keyboard

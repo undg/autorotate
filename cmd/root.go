@@ -19,6 +19,11 @@ var rootCmd = &cobra.Command{
 	Long: fmt.Sprintf(`Rotate screen and all inputs on 2in1 laptops with Xorg. Touch screen, stylus and other inputs devices,
 need to be rotated independently.
 %s will rotate screen and all input devices at once.`, sys.APP_NAME),
+	Run: func(cmd *cobra.Command, args []string) {
+		isDaemon, _ := cmd.Flags().GetBool("daemon")
+
+		sys.Autorotate(DisplayName, isDaemon)
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -32,4 +37,6 @@ func Execute() {
 
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&DisplayName, "display", "d", "eDP", "X11 Display that will be rotated, for example eDP or LVDS. You can check monitor names with command `autorotate list` or `xrandr --listactivemonitors|awk '{print $NF}'`")
+
+	rootCmd.Flags().Bool("daemon", false, "Continuously check orientation in background (every 1sec by default).")
 }

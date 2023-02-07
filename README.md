@@ -12,8 +12,15 @@ chmod +x autocommand
 ## Usage 
 Command `left` `right` `portrait` and `lanscape` are wrappers around xrandr and xinput to synchronize rotation of screen and digitizer. In fact they will rotate all xinput devices including stylus, touchpad, touchscreen, mouse and ~~webcam~~.
 
-Laptops with axis sensor can use `auto` command to detect orientation. Flag `--daemon` is designed to run in background as a service.
+Laptops with axis sensor can be run without any command to detect orientation. Flag `--daemon` is designed to run in background as a service.
 
+Check display name with `list` command.
+
+`autorotate list`
+
+`autorotate --display eDP`
+
+`autorotate --daemon --display eDP`
 
 ## Service (systemd)
 

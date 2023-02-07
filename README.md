@@ -22,6 +22,8 @@ Check display name with `list` command.
 
 `autorotate --daemon --display eDP`
 
+![image](https://user-images.githubusercontent.com/5306983/217210748-93221f5f-8dab-4645-84b2-10505d149206.png)
+
 ## Service (systemd)
 
 To install service, copy file `_config/systemd/user/autorotate.service` to `.config/systemd/user/autorotate.service`
@@ -35,6 +37,8 @@ If you want to run service after PC reboot run command:
 Start it manually with
 
 `systemctl --user start rotate.service`
+
+![image](https://user-images.githubusercontent.com/5306983/217212712-5b81a5ab-6ab3-4abf-b628-b151339a9d0e.png)
 
 ## Roadmap
 - [x] Synchronize display and digitizer

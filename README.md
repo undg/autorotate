@@ -26,7 +26,9 @@ Check display name with `list` command.
 
 ## Service (systemd)
 
-To install service, copy file `_config/systemd/user/autorotate.service` to `.config/systemd/user/autorotate.service`
+To install service, copy file
+
+`cp _config/systemd/user/rotate.service ~/.config/systemd/user/rotate.service `
 
 In line starting with `ExecStart` edit `--display` part if necessary.
 

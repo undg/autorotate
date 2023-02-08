@@ -41,10 +41,3 @@ Start it manually with
 `systemctl --user start rotate.service`
 
 ![image](https://user-images.githubusercontent.com/5306983/217212712-5b81a5ab-6ab3-4abf-b628-b151339a9d0e.png)
-
-## Roadmap
-- [x] Synchronize display and digitizer
-- [x] Run as daemon in background
-- [ ] Config to store chosen screen name and input devices
-- [ ] Script to install systemd service
-- [ ] Publish in AUR

@@ -2,4 +2,9 @@
 Description=Auto rotate screen in 2in1 laptop
 
 [Service]
+Type=simple
+StarndardOutput=journal
 ExecStart=/home/undg/bin/autorotate --daemon --display eDP
+
+[Install]
+WantedBy=default.target

@@ -18,7 +18,15 @@ Check display name with `list` command.
 
 `autorotate list`
 
+single run and exit:
+
 `autorotate --display eDP`
+
+`autorotate left --display eDP`
+
+`autorotate help`
+
+optionally to keep app running
 
 `autorotate --daemon --display eDP`
 

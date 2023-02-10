@@ -3,10 +3,10 @@ name: release
 on:
   push:
     tags:
-      - '*'
+      - "*"
 
 jobs:
-   build_release:
+  build_release:
     name: build_release
     runs-on: ubuntu-latest
     steps:
@@ -22,11 +22,11 @@ jobs:
           go build -o bin/autorotate
           cp -r _config bin/
           zip -r autorotate.zip bin/*
-      - name: version
-        run: echo "{version}::{$(./bin/autorotate version --short)}"
-        id: version
+      # - name: version
+      #   run: echo "{version}::{$(./bin/autorotate version --short)}"
+      #   id: version
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: ./autorotate.zip
+          files: ./autorotate-${{ githum.ref_name }}.zip

@@ -29,4 +29,4 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: ./autorotate-${{ githum.ref_name }}.zip
+          files: ./autorotate-${{ github.ref_name }}.zip

@@ -17,11 +17,9 @@ jobs:
       - name: build
         run: |
           sudo apt-get install -y libxi-dev
-          mkdir bin
           go get -t ./...
-          go build -o bin/autorotate
-          cp -r _config bin/
-          zip -r autorotate.zip bin/*
+          go build -o autorotate
+          zip -r "autorotate-$GITHUB_REF_NAME.zip" autorotate
       # - name: version
       #   run: echo "{version}::{$(./bin/autorotate version --short)}"
       #   id: version
@@ -29,4 +27,6 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: ./autorotate-${{ github.ref_name }}.zip
+          files: |
+            ./autorotate-${{ github.ref_name }}.zip
+            ./autorotate

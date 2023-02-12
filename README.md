@@ -18,34 +18,18 @@ Check display name with `list` command.
 
 `autorotate list`
 
-single run and exit:
-
-`autorotate --display eDP`
+In following examples `eDP` should be replaced with your display name.
+ 
+Single run and exit:
 
 `autorotate left --display eDP`
 
 `autorotate help`
 
-optionally to keep app running
+You keep app running with command that should be added to autostart in your window manager.
 
-`autorotate --daemon --display eDP`
+`autorotate --display eDP`
+
 
 ![image](https://user-images.githubusercontent.com/5306983/217210748-93221f5f-8dab-4645-84b2-10505d149206.png)
 
-## Service (systemd)
-
-To install service, copy file
-
-`cp _config/systemd/user/rotate.service ~/.config/systemd/user/rotate.service `
-
-In line starting with `ExecStart` edit `--display` part if necessary.
-
-If you want to run service after PC reboot run command:
-
-`systemctl --user enable rotate.service`
-
-Start it manually with
-
-`systemctl --user start rotate.service`
-
-![image](https://user-images.githubusercontent.com/5306983/217212712-5b81a5ab-6ab3-4abf-b628-b151339a9d0e.png)

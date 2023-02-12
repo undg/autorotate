@@ -20,9 +20,9 @@ var rootCmd = &cobra.Command{
 need to be rotated independently.
 %s will rotate screen and all input devices at once.`, sys.APP_NAME),
 	Run: func(cmd *cobra.Command, args []string) {
-		isDaemon, _ := cmd.Flags().GetBool("daemon")
+		// isDaemon, _ := cmd.Flags().GetBool("daemon")
 
-		sys.Autorotate(DisplayName, isDaemon)
+		sys.Autorotate(DisplayName, true)
 	},
 }
 

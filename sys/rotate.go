@@ -28,6 +28,11 @@ func Rotate(screen string, rotate string, matrix string) {
 	for _, device := range xinput.GetXDeviceInfos(display) {
 		if device.Use == "slave pointer" {
 
+			// @TODO (undg) 2023-02-27: dirty quick fix for mouse. Solve problem by config/flag (explicit/implicit/all)
+			if device.Name == "Razer Razer Basilisk X HyperSpeed" {
+				continue
+			}
+
 			_, errXinput := exec.Command("sh", "-c", "xinput set-prop "+strconv.FormatUint(device.Id, 10)+" --type=float 'Coordinate Transformation Matrix' "+matrix).Output()
 
 			if errXinput != nil {

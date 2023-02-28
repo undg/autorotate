@@ -28,8 +28,13 @@ func Rotate(screen string, rotate string, matrix string) {
 	for _, device := range xinput.GetXDeviceInfos(display) {
 		if device.Use == "slave pointer" {
 
-			// @TODO (undg) 2023-02-27: dirty quick fix for mouse. Solve problem by config/flag (explicit/implicit/all)
-			if device.Name == "Razer Razer Basilisk X HyperSpeed" {
+			// @TODO (undg) 2023-02-27: dirty quick fix for external mouses. Should solve problem by config/flag (explicit/implicit/all)
+
+			// don't rotate external device:
+			switch device.Name {
+			case "Razer Razer Basilisk X HyperSpeed": // mouse
+				continue
+			case "Virtual core XTEST pointer": // barrier/synergy
 				continue
 			}
 

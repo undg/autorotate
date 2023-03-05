@@ -4,13 +4,17 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/adrg/xdg"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"github.com/undg/autorotate/sys"
 )
 
 // @TODO (undg) 2023-02-06: move it to config
 // Xorg monitor name
-var DisplayName string
+var displayName string
+
+var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -22,7 +26,7 @@ need to be rotated independently.
 	Run: func(cmd *cobra.Command, args []string) {
 		// isDaemon, _ := cmd.Flags().GetBool("daemon")
 
-		sys.Autorotate(DisplayName, true)
+		sys.Autorotate(displayName, true)
 	},
 }
 
@@ -36,7 +40,28 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.PersistentFlags().StringVarP(&DisplayName, "display", "d", "eDP", "X11 Display that will be rotated, for example eDP or LVDS. You can check monitor names with command `autorotate list` or `xrandr --listactivemonitors|awk '{print $NF}'`")
+	cobra.OnInitialize(initViper)
+
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "c", "config file (default XDG_CONFIG_HOME/autorotate/autorotate.toml)")
+	rootCmd.PersistentFlags().StringVarP(&displayName, "display", "d", "eDP", "X11 Display that will be rotated, for example eDP or LVDS. You can check monitor names with command `autorotate list` or `xrandr --listactivemonitors|awk '{print $NF}'`")
 
 	rootCmd.Flags().Bool("daemon", false, "Continuously check orientation in background (every 1sec by default).")
+}
+
+func initViper() {
+	if cfgFile != "" {
+		// Use config file from flag
+		viper.SetConfigName(cfgFile)
+	} else {
+		// Use .config/autorotate.toml file
+		viper.AddConfigPath(xdg.ConfigHome + "/autorotate/")
+		viper.SetConfigType("toml")
+		viper.SetConfigName("autorotate")
+	}
+
+	viper.AutomaticEnv()
+
+	if err := viper.ReadInConfig(); err == nil {
+		fmt.Println("Using config file:", viper.ConfigFileUsed())
+	}
 }

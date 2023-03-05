@@ -21,6 +21,7 @@ func Rotate(screen string, rotate string, matrix string) {
 	if errXrandr != nil {
 		log.Fatal(errXrandr)
 	}
+		
 
 	display := xinput.XOpenDisplay(nil)
 	defer xinput.XCloseDisplay(display)

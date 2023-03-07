@@ -32,17 +32,19 @@ need to be rotated independently.
 
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
-func Execute() {
+func Execute() error {
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
 	}
+
+	return rootCmd.Execute()
 }
 
 func init() {
 	cobra.OnInitialize(initViper)
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "c", "config file (default XDG_CONFIG_HOME/autorotate/autorotate.toml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default XDG_CONFIG_HOME/autorotate/autorotate.toml)")
 	rootCmd.PersistentFlags().StringVarP(&displayName, "display", "d", "eDP", "X11 Display that will be rotated, for example eDP or LVDS. You can check monitor names with command `autorotate list` or `xrandr --listactivemonitors|awk '{print $NF}'`")
 
 	rootCmd.Flags().Bool("daemon", false, "Continuously check orientation in background (every 1sec by default).")
@@ -51,17 +53,29 @@ func init() {
 func initViper() {
 	if cfgFile != "" {
 		// Use config file from flag
-		viper.SetConfigName(cfgFile)
+		viper.SetConfigFile(cfgFile)
 	} else {
 		// Use .config/autorotate.toml file
 		viper.AddConfigPath(xdg.ConfigHome + "/autorotate/")
 		viper.SetConfigType("toml")
-		viper.SetConfigName("autorotate")
+		viper.SetConfigName("config")
 	}
 
 	viper.AutomaticEnv()
 
-	if err := viper.ReadInConfig(); err == nil {
+	if err := viper.ReadInConfig(); err != nil {
+		if _, ok := err.(viper.ConfigFileAlreadyExistsError); ok {
+			fmt.Println("Config file not found.")
+		} else {
+
+			fmt.Println("Config found, but error was produced.")
+		}
+		fmt.Println("Config file not found.")
+
+	} else {
 		fmt.Println("Using config file:", viper.ConfigFileUsed())
 	}
+
+	fmt.Println("Config varaible: ", cfgFile)
+	fmt.Println("Config file used in viper:", viper.ConfigFileUsed())
 }

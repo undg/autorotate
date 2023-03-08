@@ -6,7 +6,7 @@
 Download and unzip [autorotate.zip](https://github.com/undg/autorotate/releases/latest). Give execution permission with command:
 ```
 cd bin/
-chmod +x autocommand
+chmod +x autorotate
 ```
 
 ## Usage 
@@ -33,3 +33,9 @@ You keep app running with command that should be added to autostart in your wind
 
 ![image](https://user-images.githubusercontent.com/5306983/217210748-93221f5f-8dab-4645-84b2-10505d149206.png)
 
+## Compilation
+
+To compile app in folder build under file name autorotate, run command:
+`
+go build -o build/autorotate
+`

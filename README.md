@@ -4,6 +4,7 @@
 
 ## Install
 Download and unzip [autorotate.zip](https://github.com/undg/autorotate/releases/latest). Give execution permission with command:
+
 ```
 unzip autorotate.zip
 cd bin/
@@ -12,11 +13,12 @@ chmod +x autorotate
 ## Compile from source
 
 To compile binary file in `bin` directory, run the command:
-`
+
+```
 go build -o bin/autorotate
 cd bin/
 chmod +x autorotate
-`
+```
 
 ## Usage 
 Command `left` `right` `portrait` and `lanscape` are wrappers around xrandr and xinput to synchronize rotation of screen and digitizer. In fact they will rotate all xinput devices including stylus, touchpad, touchscreen, mouse and ~~webcam~~.

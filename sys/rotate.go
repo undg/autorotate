@@ -33,9 +33,40 @@ func Rotate(screen string, rotate string, matrix string) {
 
 			// don't rotate external device:
 			switch device.Name {
+			case "DA V2 X Mouse": // mouse
+				continue
+			case "Razer Razer DeathAdder V2 X HyperSpeed Condumer Control": // mouse
+				continue
+			case "Razer Razer DeathAdder V2 X HyperSpeed Mouse": // mouse
+				continue
+			case "Razer Razer DeathAdder V2 X HyperSpeed": // mouse
+				continue
 			case "Razer Razer Basilisk X HyperSpeed": // mouse
 				continue
 			case "Virtual core XTEST pointer": // barrier/synergy
+				continue
+			}
+
+			switch device.Id {
+			case 10:
+				continue
+			case 11:
+				continue
+			case 12:
+				continue
+			case 13:
+				continue
+			case 24:
+				continue
+			case 27:
+				continue
+			case 28:
+				continue
+			case 29:
+				continue
+			case 30:
+				continue
+			case 31:
 				continue
 			}
 

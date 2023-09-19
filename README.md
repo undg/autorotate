@@ -10,15 +10,6 @@ unzip autorotate.zip
 cd bin/
 chmod +x autorotate
 ```
-## Compile from source
-
-To compile binary file in `bin` directory, run the command:
-
-```
-go build -o bin/autorotate
-cd bin/
-chmod +x autorotate
-```
 
 ## Usage 
 Command `left` `right` `portrait` and `lanscape` are wrappers around xrandr and xinput to synchronize rotation of screen and digitizer. In fact they will rotate all xinput devices including stylus, touchpad, touchscreen, mouse and ~~webcam~~.
@@ -43,4 +34,14 @@ You keep app running with command that should be added to autostart in your wind
 
 
 ![image](https://user-images.githubusercontent.com/5306983/217210748-93221f5f-8dab-4645-84b2-10505d149206.png)
+
+## Compile from source
+
+To compile binary file in `bin` directory, run the command:
+
+```
+go build -o bin/autorotate
+cd bin/
+chmod +x autorotate
+```
 

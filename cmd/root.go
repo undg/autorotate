@@ -10,6 +10,31 @@ import (
 	"github.com/undg/autorotate/sys"
 )
 
+type DisplayConfig struct {
+	Enable string `mapstructure:"enable"`
+	Disable string `mapstructure:"disable"`
+}
+
+type InputConfig struct {
+	Enable string `mapstructure:"enable"`
+	Disable string `mapstructure:"disable"`
+}
+
+type KeyboardConfig struct {
+	Name string `mapstructure:"name"`
+	Landscape bool `mapstructure:"landscape"`
+	LandscapeInvert bool `mapstructure:"landscape_invert"`
+	Portrait bool `mapstructure:"portrait"`
+	PortraitInvert bool `mapstructure:"portrait_invert"`
+}
+
+
+type Config struct {
+	Display DisplayConfig `mapstructure:"display"`
+	Input InputConfig `mapstructure:"input"`
+	Keyboard KeyboardConfig `mapstructure:"keyboard"`
+}
+
 // @TODO (undg) 2023-02-06: move it to config
 // Xorg monitor name
 var displayName string
@@ -78,4 +103,5 @@ func initViper() {
 
 	fmt.Println("Config varaible: ", cfgFile)
 	fmt.Println("Config file used in viper:", viper.ConfigFileUsed())
+	fmt.Println("Viper config variables:", viper.GetString("Display"))
 }

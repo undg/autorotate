@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/adrg/xdg"
@@ -11,27 +12,26 @@ import (
 )
 
 type DisplayConfig struct {
-	Enable string `mapstructure:"enable"`
+	Enable  string `mapstructure:"enable"`
 	Disable string `mapstructure:"disable"`
 }
 
 type InputConfig struct {
-	Enable string `mapstructure:"enable"`
+	Enable  string `mapstructure:"enable"`
 	Disable string `mapstructure:"disable"`
 }
 
 type KeyboardConfig struct {
-	Name string `mapstructure:"name"`
-	Landscape bool `mapstructure:"landscape"`
-	LandscapeInvert bool `mapstructure:"landscape_invert"`
-	Portrait bool `mapstructure:"portrait"`
-	PortraitInvert bool `mapstructure:"portrait_invert"`
+	Name            string `mapstructure:"name"`
+	Landscape       bool   `mapstructure:"landscape"`
+	LandscapeInvert bool   `mapstructure:"landscape_invert"`
+	Portrait        bool   `mapstructure:"portrait"`
+	PortraitInvert  bool   `mapstructure:"portrait_invert"`
 }
 
-
 type Config struct {
-	Display DisplayConfig `mapstructure:"display"`
-	Input InputConfig `mapstructure:"input"`
+	Display  DisplayConfig  `mapstructure:"display"`
+	Input    InputConfig    `mapstructure:"input"`
 	Keyboard KeyboardConfig `mapstructure:"keyboard"`
 }
 
@@ -69,39 +69,38 @@ func Execute() error {
 func init() {
 	cobra.OnInitialize(initViper)
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default XDG_CONFIG_HOME/autorotate/autorotate.toml)")
+	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", xdg.ConfigHome+"/autorotate/", "config file (default XDG_CONFIG_HOME/autorotate/autorotate.toml)")
 	rootCmd.PersistentFlags().StringVarP(&displayName, "display", "d", "eDP", "X11 Display that will be rotated, for example eDP or LVDS. You can check monitor names with command `autorotate list` or `xrandr --listactivemonitors|awk '{print $NF}'`")
 
 	rootCmd.Flags().Bool("daemon", false, "Continuously check orientation in background (every 1sec by default).")
 }
 
-func initViper() {
-	if cfgFile != "" {
-		// Use config file from flag
-		viper.SetConfigFile(cfgFile)
-	} else {
-		// Use .config/autorotate.toml file
-		viper.AddConfigPath(xdg.ConfigHome + "/autorotate/")
-		viper.SetConfigType("toml")
-		viper.SetConfigName("config")
-	}
+// LoadConfig reads configuration from file or environment variables.
+func LoadConfig(path string) (config Config, err error) {
+	viper.AddConfigPath(path)
+	viper.SetConfigName("config")
+	viper.SetConfigType("toml")
 
 	viper.AutomaticEnv()
 
-	if err := viper.ReadInConfig(); err != nil {
-		if _, ok := err.(viper.ConfigFileAlreadyExistsError); ok {
-			fmt.Println("Config file not found.")
-		} else {
-
-			fmt.Println("Config found, but error was produced.")
-		}
-		fmt.Println("Config file not found.")
-
-	} else {
-		fmt.Println("Using config file:", viper.ConfigFileUsed())
+	err = viper.ReadInConfig()
+	if err != nil {
+		return
 	}
 
-	fmt.Println("Config varaible: ", cfgFile)
+	err = viper.Unmarshal(&config)
+	return
+}
+
+func initViper() {
+	cfg, err := LoadConfig(cfgFile)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(cfg.Display)
+
 	fmt.Println("Config file used in viper:", viper.ConfigFileUsed())
-	fmt.Println("Viper config variables:", viper.GetString("Display"))
+	fmt.Println("Viper config variables:", cfg.Display)
 }

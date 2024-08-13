@@ -2,28 +2,30 @@
 # Work in progress, those values are not implemented in the app.
 
 [Display]
-# List of display names to enable rotations.
-# If commented out or list is empty, all displays will rotate.
-enable = [ "eDP" ]
-# Ignore list, useful when
-#ignore = []
+# Display names for rotation. If omitted or empty, all displays rotate.
+enabled = [ "eDP" ]
+
+# Displays to ignore. Useful when ... (when???)
+# @TODO (undg) 2024-04-16: decide if can be deleted
+#ignored = []
 
 [Input]
-# Check list with `autorotate list` command.
+# Use `autorotate list` to find input names.
 
-# List of input names to enable rotations. All if commented out or empty.
-# enable = []
-# Enable all devices  with exception of names in ignored.
-ignore = [
+# Input names for rotation. Defaults to all if omitted or empty.
+#enabled = []
+
+# Devices that will not rotate.
+ignored = [
     "Razer Razer Basilisk X HyperSpeed", # mouse
     "Virtual core XTEST pointer", # barrier/synergy
 ]
 
 [Keyboard]
-# Keyboard names to controll
+# Keyboard names to controll, typicaly only your laptop's keyboard.
 name = ["AT Translated Set 2 keyboard"]
-# Determine when to disable keyboard
-landscape=true
-landscapeInvert=false
-portrait=false
-portraitInvert=false
+# Conditions to disable keyboard:
+disable_on_landscape=true
+disable_on_landscapeInvert=false
+disable_on_portrait=false
+disable_on_portraitInvert=false

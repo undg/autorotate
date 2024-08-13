@@ -69,6 +69,12 @@ func Execute() error {
 func init() {
 	cobra.OnInitialize(initViper)
 
+	dn := viper.Get("display_name").(map[string]interface{})
+
+	enabledDisplays := dn["enabled"].([]interface{})
+	firstDisplayEnabled := enabledDisplays[0].(string)
+	displayName := firstDisplayEnabled
+
 	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", xdg.ConfigHome+"/autorotate/", "config file (default XDG_CONFIG_HOME/autorotate/autorotate.toml)")
 	rootCmd.PersistentFlags().StringVarP(&displayName, "display", "d", "eDP", "X11 Display that will be rotated, for example eDP or LVDS. You can check monitor names with command `autorotate list` or `xrandr --listactivemonitors|awk '{print $NF}'`")
 
@@ -100,7 +106,14 @@ func initViper() {
 	}
 
 	fmt.Println(cfg.Display)
+	dn := viper.Get("display_name").(map[string]interface{})
+
+	enabledDisplays := dn["enabled"].([]interface{})
+	firstDisplayEnabled := enabledDisplays[0].(string)
+
+	// cfg.Display
+
+	fmt.Println("DN", firstDisplayEnabled)
 
 	fmt.Println("Config file used in viper:", viper.ConfigFileUsed())
-	fmt.Println("Viper config variables:", cfg.Display)
 }

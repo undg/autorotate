@@ -1,0 +1,31 @@
+# vim: ft=toml
+
+[display_name]
+enabled = [ "eDP" ]
+# disabled = [ "eDP" ]
+
+[input_name]
+# enabled = []
+disabled = [
+    "Razer Razer Basilisk X HyperSpeed", # mouse
+    "Razer Razer DeathAdder V2 X HyperSpeed Condumer Control", # mouse
+    "Razer Razer DeathAdder V2 X HyperSpeed Mouse", # mouse
+    "Razer Razer DeathAdder V2 X HyperSpeed", # mouse
+    "Razer Razer Basilisk X HyperSpeed", # mouse
+    "DA V2 X Mouse", # mouse
+    "Virtual core XTEST pointer", # barrier/synergy
+]
+
+[input_id]
+# enabled = []
+disabled = [ 10, 11, 12, 13, 24, 27, 28, 29, 30, 31 ]
+
+[keyboard]
+enabled = ["AT Translated Set 2 keyboard"]
+#disabled = []
+
+
+landscape=true
+landscape_invert=false
+portrait=false
+portrait_invert=false
